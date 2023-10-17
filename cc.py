@@ -1,3 +1,6 @@
+"""
+cron: 0 0 0,20 * * ?
+"""
 # 软件:建行生活
 # 活动信息: 奋斗季cc豆 功能：每日营收，签到 浏览任务，答题，抽奖，专区任务
 # 先开抓包，先开抓包，抓的是微信端,搜wParam，复制wParam值，没抓到等两小时在抓
@@ -22,8 +25,8 @@ user_cookie = os.getenv("ccdck")
 doll_flag  1开启抓娃娃，0关闭
 doll_draw 抓娃娃次数，总数小于10
 '''
-doll_flag = 0  # 1开启抓娃娃，0关闭
-doll_draw = 1
+doll_flag = 1  # 1开启抓娃娃，0关闭
+doll_draw = 10
 
 '''
 basket_flag  1开启投篮球，0关闭
@@ -37,9 +40,9 @@ box_flag   1开启开盲盒，0关闭
 box_id  开盲盒类型，1为88豆，2为188豆，3为10000豆
 box_draw   开盲盒次数，总数小于5
 '''
-box_flag = 0
-box_id = 1
-box_draw = 2
+box_flag = 1
+box_id = 3
+box_draw = 5
 
 debug = 0  # 开启调式
 
@@ -441,8 +444,8 @@ class CCD:
         if surplus != '0':
             go_data = self.send_request(go_url, headers = self.bus_headers, method = 'POST')
             if go_data:
-                mileage_go = go_data.get('data', {}).get('mileage_go', '')
-                user_node = go_data.get('data', {}).get('user_node_value')
+                mileage_go = query_data.get('data', {}).get('mileage_go', '')
+                user_node = query_data.get('data', {}).get('user_node_value')
                 print(f'前进: {mileage_go}里程， 当前: {user_node}里程')
 
     def process_rewards(self, rewards):
